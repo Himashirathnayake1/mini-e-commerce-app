@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mini_e/data/products.dart';
 import 'package:mini_e/providers/favourites_provider.dart';
 import 'package:provider/provider.dart';
@@ -103,9 +104,9 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
                     color: Colors.white,
                     shape: BoxShape.circle,
                   ),
-                  child: const Icon(
+                  child:  Icon(
                     Icons.favorite_border,
-                    size: 18,
+                    size: 28.w,
                     color: Colors.red,
                   ),
                 ),
@@ -134,7 +135,7 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
                 ),
               ),
 
-              const SizedBox(height: 6),
+        SizedBox(height: 6.h),
 
               Text(
                 "Rs. ${product.price}",

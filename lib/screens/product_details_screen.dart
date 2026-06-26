@@ -52,9 +52,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                         product.image,
                         width: double.infinity, // 💡 Full Width
                         height: double.infinity, // 💡 Full Height inside flex 5
-                        fit:
-                            BoxFit
-                                .cover, 
+                        fit: BoxFit.cover,
                       ),
                     ),
 
@@ -62,9 +60,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                       top: 70.h,
                       left: 30.w,
                       child: CircleAvatar(
-                        backgroundColor: Colors.white.withOpacity(
-                          0.9,
-                        ), 
+                        backgroundColor: Colors.white.withOpacity(0.9),
                         child: IconButton(
                           icon: const Icon(
                             Icons.arrow_back,
@@ -96,7 +92,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                       Expanded(
                         child: Text(
                           product.name,
-                          style:  TextStyle(
+                          style: TextStyle(
                             fontSize: 30.sp,
                             fontWeight: FontWeight.bold,
                           ),
@@ -104,7 +100,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                       ),
                       Text(
                         "Rs.${product.price}",
-                        style:  TextStyle(
+                        style: TextStyle(
                           color: Color(0xff6C63FF),
                           fontWeight: FontWeight.bold,
                           fontSize: 30.sp,
@@ -112,18 +108,18 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                       ),
                     ],
                   ),
-              SizedBox(height: 15.h),
+                  SizedBox(height: 15.h),
 
                   // Rating
                   Row(
                     children: [
                       const Icon(Icons.star, color: Colors.amber),
-                     SizedBox(width: 5.w),
+                      SizedBox(width: 5.w),
                       Text(
                         "${product.rating}",
                         style: const TextStyle(fontWeight: FontWeight.w600),
                       ),
-                     SizedBox(width: 10.w),
+                      SizedBox(width: 10.w),
                       const Text(
                         "(1,245 Reviews)",
                         style: TextStyle(color: Colors.grey),
@@ -132,11 +128,14 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                   ),
                   SizedBox(height: 25.h),
 
-               Text(
+                  Text(
                     "Quantity",
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30.sp),
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 30.sp,
+                    ),
                   ),
-               SizedBox(height: 10.h),
+                  SizedBox(height: 10.h),
                   Container(
                     width: 130,
                     height: 50,
@@ -159,7 +158,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                         ),
                         Text(
                           quantity.toString(),
-                          style:  TextStyle(
+                          style: TextStyle(
                             fontSize: 18.sp,
                             fontWeight: FontWeight.bold,
                           ),
@@ -178,11 +177,14 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                   SizedBox(height: 25.h),
 
                   // Description
-               Text(
+                  Text(
                     "Description",
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30.sp),
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 30.sp,
+                    ),
                   ),
-               SizedBox(height: 10.h),
+                  SizedBox(height: 10.h),
 
                   Expanded(
                     child: SingleChildScrollView(
@@ -198,31 +200,31 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                       // Add To Cart Button
                       Expanded(
                         child: ElevatedButton(
-                          
                           onPressed: () {
                             context.read<CartProvider>().addToCart(
                               product,
-                            ); 
+                              quantity, // ✅ pass the quantity selected on this screen
+                            );
                             Navigator.push(
                               context,
                               MaterialPageRoute(
                                 builder: (_) => const CartScreen(),
                               ),
                             );
-                            // Add to cart logic here
                           },
                           style: ElevatedButton.styleFrom(
-                        
                             backgroundColor: Colors.white,
-                            side:  BorderSide(color: Color(0xff6C63FF)),
+                            side: BorderSide(color: Color(0xff6C63FF)),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(15),
                             ),
-                               minimumSize: Size(double.infinity, 90.h), // Set the height of the button 
+                            minimumSize: Size(
+                              double.infinity,
+                              90.h,
+                            ), // Set the height of the button
                           ),
-                          
 
-                          child:  Center(
+                          child: Center(
                             child: Text(
                               "Add To Cart",
                               style: TextStyle(
@@ -234,7 +236,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                           ),
                         ),
                       ),
-                    SizedBox(width: 15.w  ),
+                      SizedBox(width: 15.w),
 
                       // Buy Now Button
                       Expanded(
@@ -244,7 +246,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                             color: const Color(0xff6C63FF),
                             borderRadius: BorderRadius.circular(15),
                           ),
-                          child:  Center(
+                          child: Center(
                             child: Text(
                               "Buy Now",
                               style: TextStyle(
