@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
           title: "Mini-E",
           theme: ThemeData(
             colorSchemeSeed: Colors.deepPurple,
-            textTheme: GoogleFonts.robotoTextTheme(),
+            textTheme: GoogleFonts.montserratTextTheme(),
           ),
           home: const SplashScreen(),
         );

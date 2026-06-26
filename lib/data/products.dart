@@ -9,7 +9,7 @@ List<Product> products = [
     image: "assets/images/schoolbag.webp",
     price: 1999.99,
     rating: 4.9,
-    description: "Spacious school bag.",
+    description: "Spacious school bag. Selling a school bag effectively requires a compelling product description. This fully customizable, high-converting template highlights the exact details, features, and benefits parents and students look for. You can easily copy and adapt this description for e-commerce, social media, or local classified listings.",
   ),
   Product(
     id: 2,

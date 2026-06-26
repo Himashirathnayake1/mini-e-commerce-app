@@ -54,7 +54,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                         height: double.infinity, // 💡 Full Height inside flex 5
                         fit:
                             BoxFit
-                                .cover, // 💡 කිසිදු හිස් ඉඩක් නොතබා මුළු ප්‍රදේශයම පුරවයි (Crop to fit)
+                                .cover, 
                       ),
                     ),
 
@@ -64,7 +64,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                       child: CircleAvatar(
                         backgroundColor: Colors.white.withOpacity(
                           0.9,
-                        ), // බ්ලෙන්ඩ් වීම සඳහා
+                        ), 
                         child: IconButton(
                           icon: const Icon(
                             Icons.arrow_back,
@@ -97,7 +97,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                         child: Text(
                           product.name,
                           style: const TextStyle(
-                            fontSize: 28,
+                            fontSize: 23,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
@@ -107,7 +107,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                         style: const TextStyle(
                           color: Color(0xff6C63FF),
                           fontWeight: FontWeight.bold,
-                          fontSize: 26,
+                          fontSize: 23,
                         ),
                       ),
                     ],

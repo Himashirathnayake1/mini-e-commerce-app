@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mini_e/models/prooduct.dart';
 import 'package:mini_e/providers/cart_provider.dart';
 import 'package:mini_e/screens/cart_screen.dart';
+import 'package:mini_e/screens/profile_screen.dart';
 import 'package:provider/provider.dart';
 import '../data/products.dart';
 import '../widgets/product_card.dart';
@@ -23,26 +24,29 @@ class _HomeScreenState extends State<HomeScreen> {
     _filteredProducts = products; // show all products initially
     _searchController.addListener(_filterProducts);
   }
+
   void _filterProducts() {
     final query = _searchController.text.toLowerCase().trim();
     setState(() {
       if (query.isEmpty) {
         _filteredProducts = products;
       } else {
-        _filteredProducts = products
-            .where((product) => product.name.toLowerCase().contains(query))
-            .toList();
+        _filteredProducts =
+            products
+                .where((product) => product.name.toLowerCase().contains(query))
+                .toList();
       }
     });
   }
+
   @override
   void dispose() {
     _searchController.dispose();
     super.dispose();
   }
+
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       backgroundColor: const Color(0xfff5f5f7),
 
@@ -50,71 +54,103 @@ class _HomeScreenState extends State<HomeScreen> {
         centerTitle: true,
         backgroundColor: Colors.white,
         elevation: 0,
-        title: const Text(
-          "Mini-E",
-          style: TextStyle(color: Colors.black,fontSize: 23, fontWeight: FontWeight.bold),
-        ),
-        actions:  [
-          Padding(
-            padding: EdgeInsets.only(right: 15.w),
-            child:Consumer<CartProvider>(
-  builder: (context, cart, child) {
 
-    return Stack(
-      children: [
-
-        IconButton(
-          icon: const Icon(
-            Icons.shopping_cart_outlined,
+        leading: Container(
+          margin: const EdgeInsets.all(6),
+          decoration: BoxDecoration(
+            color: Color(0xff6C63FF).withOpacity(0.1),
+            shape: BoxShape.circle,
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.05),
+                blurRadius: 5,
+                offset: const Offset(0, 2),
+              ),
+            ],
           ),
-
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (_) =>
-                    const CartScreen(),
-              ),
-            );
-          },
+          child: IconButton(
+            icon: const Icon(Icons.person_outline, color: Colors.black),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (_) => const ProfileScreen()),
+              );
+            },
+          ),
         ),
 
-        if (cart.itemCount > 0)
-          Positioned(
-            right: 0,
-            top: 0,
-
-            child: Container(
-              padding:
-                  const EdgeInsets.all(4),
-
-              decoration:
-                  const BoxDecoration(
-                color: Colors.red,
-                shape: BoxShape.circle,
+        title: const Text(
+          "E-Shopping",
+          style: TextStyle(
+            color: Colors.black,
+            fontSize: 23,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        actions: [
+          Container(
+            margin: const EdgeInsets.all(6),
+          decoration: BoxDecoration(
+            color: Color(0xff6C63FF).withOpacity(0.1),
+            shape: BoxShape.circle,
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.05),
+                blurRadius: 5,
+                offset: const Offset(0, 2),
               ),
-
-              child: Text(
-                cart.itemCount.toString(),
-
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 10,
-                ),
+            ],
+          ),
+            child:  Consumer<CartProvider>(
+                builder: (context, cart, child) {
+                  return Stack(
+                    children: [
+                      IconButton(
+                        icon: const Icon(Icons.shopping_cart_outlined),
+            
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (_) => const CartScreen()),
+                          );
+                        },
+                      ),
+            
+                      if (cart.itemCount > 0)
+                        Positioned(
+                          right: 0,
+                          top: 0,
+            
+                          child: Container(
+                            padding: const EdgeInsets.all(4),
+            
+                            decoration: const BoxDecoration(
+                              color: Colors.red,
+                              shape: BoxShape.circle,
+                            ),
+            
+                            child: Text(
+                              cart.itemCount.toString(),
+            
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 10,
+                              ),
+                            ),
+                          ),
+                        ),
+                    ],
+                  );
+                },
               ),
             ),
-          ),
-      ],
-    );
-  },
-),
-          ),
+       
         ],
       ),
 
       body: SingleChildScrollView(
         child: Padding(
-          padding:  EdgeInsets.symmetric(horizontal: 22.w,vertical: 16.h),
+          padding: EdgeInsets.symmetric(horizontal: 22.w, vertical: 16.h),
 
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -123,7 +159,10 @@ class _HomeScreenState extends State<HomeScreen> {
               Text.rich(
                 TextSpan(
                   text: "Discover",
-                  style: TextStyle(fontSize: 42.sp, fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                    fontSize: 42.sp,
+                    fontWeight: FontWeight.bold,
+                  ),
 
                   children: <TextSpan>[
                     TextSpan(
@@ -135,7 +174,6 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
 
               SizedBox(height: 20.h),
-
 
               Container(
                 height: 70.h,
@@ -153,75 +191,81 @@ class _HomeScreenState extends State<HomeScreen> {
                   ],
                 ),
 
-                child:  TextField(
+                child: TextField(
                   controller: _searchController,
                   style: TextStyle(fontSize: 25.sp),
                   decoration: InputDecoration(
                     hintText: "Search products by name",
                     hintStyle: TextStyle(fontSize: 25.sp),
                     prefixIcon: Icon(Icons.search),
-                     suffixIcon: _searchController.text.isNotEmpty
-                        ? IconButton(
-                            icon: Icon(Icons.close, size: 20.sp),
-                            onPressed: () {
-                              _searchController.clear();
-                            },
-                          )
-                        : null,
+                    suffixIcon:
+                        _searchController.text.isNotEmpty
+                            ? IconButton(
+                              icon: Icon(Icons.close, size: 20.sp),
+                              onPressed: () {
+                                _searchController.clear();
+                              },
+                            )
+                            : null,
                     border: InputBorder.none,
-                    contentPadding: EdgeInsets.symmetric(vertical: 20.h, horizontal: 35.w), 
-
+                    contentPadding: EdgeInsets.symmetric(
+                      vertical: 20.h,
+                      horizontal: 35.w,
+                    ),
                   ),
-
                 ),
               ),
 
-           SizedBox(height: 20.h),
+              SizedBox(height: 20.h),
 
-               if (_searchController.text.isEmpty) ...[
-              Container(
-                height: 260.h,
-                width: double.infinity,
+              if (_searchController.text.isEmpty) ...[
+                Container(
+                  height: 260.h,
+                  width: double.infinity,
 
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20.r),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20.r),
 
-                  gradient: const LinearGradient(
-                    colors: [Color(0xff6C63FF), Color(0xff8E7CFF)],
+                    gradient: const LinearGradient(
+                      colors: [Color(0xff6C63FF), Color(0xff8E7CFF)],
+                    ),
                   ),
-                ),
 
-                child: Padding(
-                  padding:EdgeInsets.all(20.r),
+                  child: Padding(
+                    padding: EdgeInsets.all(20.r),
 
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.center,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.center,
 
-                    children:  [
-                      Text(
-                        "Summer Sale",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 46.sp,
-                          fontWeight: FontWeight.bold,
+                      children: [
+                        Text(
+                          "Summer Sale",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 46.sp,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
-                      ),
 
-                      SizedBox(height: 10.h),
+                        SizedBox(height: 10.h),
 
-                      Text(
-                        "Up to 50% OFF",
-                        style: TextStyle(color: Colors.white70, fontSize: 26.sp),
-                      ),
-                    ],
+                        Text(
+                          "Up to 50% OFF",
+                          style: TextStyle(
+                            color: Colors.white70,
+                            fontSize: 26.sp,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
-              ),
 
-         SizedBox(height: 25.h),],
+                SizedBox(height: 25.h),
+              ],
 
-  Text(
+              Text(
                 _searchController.text.isEmpty
                     ? "Popular Products"
                     : "Search Results (${_filteredProducts.length})",
@@ -232,14 +276,13 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
 
-    SizedBox(height: 20.h),
-// Empty state when no products match
+              SizedBox(height: 20.h),
+              // Empty state when no products match
               if (_filteredProducts.isEmpty)
                 Padding(
                   padding: EdgeInsets.symmetric(vertical: 60.h),
                   child: Center(
                     child: Column(
-                      
                       children: [
                         Icon(
                           Icons.search_off,
@@ -249,32 +292,29 @@ class _HomeScreenState extends State<HomeScreen> {
                         SizedBox(height: 22.h),
                         Text(
                           "No products found",
-                          style: TextStyle(
-                            fontSize: 26.sp,
-                            color: Colors.grey,
-                          ),
+                          style: TextStyle(fontSize: 26.sp, color: Colors.grey),
                         ),
                       ],
                     ),
                   ),
                 )
               else
-              GridView.builder(
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
+                GridView.builder(
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
 
-                itemCount: _filteredProducts.length,
+                  itemCount: _filteredProducts.length,
 
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount:1.sw> 700 ? 4 : 2,
-                  crossAxisSpacing: 15.r,
-                  mainAxisSpacing: 15.r,
-                  childAspectRatio: 0.70,
-                ),
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 1.sw > 700 ? 4 : 2,
+                    crossAxisSpacing: 15.r,
+                    mainAxisSpacing: 15.r,
+                    childAspectRatio: 0.70,
+                  ),
 
-                itemBuilder: (context, index) {
-                  return ProductCard(product: _filteredProducts[index]);
-               },
+                  itemBuilder: (context, index) {
+                    return ProductCard(product: _filteredProducts[index]);
+                  },
                 ),
             ],
           ),

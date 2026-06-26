@@ -13,7 +13,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    Timer(const Duration(seconds: 2), () {
+    Timer(const Duration(seconds: 3), () {
      Navigator.pushReplacement(
           context,
           MaterialPageRoute(
@@ -46,15 +46,17 @@ class _SplashScreenState extends State<SplashScreen> {
                   color: Colors.white.withOpacity(0.12),
                   borderRadius: BorderRadius.circular(28),
                 ),
-                child: const Icon(
-                  Icons.shopping_bag_rounded,
-                  size: 72,
+                child: Image.network(
+                  "https://cdn-icons-png.flaticon.com/512/891/891462.png",
+                  width: 100,
+                  height: 100,
                   color: Colors.white,
                 ),
+               
               ),
               const SizedBox(height: 28),
               const Text(
-                "Mini-E",
+                "E-Shopping",
                 style: TextStyle(
                   fontSize: 38,
                   fontWeight: FontWeight.w700,
