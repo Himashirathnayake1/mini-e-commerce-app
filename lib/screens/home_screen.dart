@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:mini_e/models/prooduct.dart';
+import 'package:mini_e/providers/cart_provider.dart';
+import 'package:mini_e/screens/cart_screen.dart';
+import 'package:provider/provider.dart';
 import '../data/products.dart';
 import '../widgets/product_card.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -54,7 +57,57 @@ class _HomeScreenState extends State<HomeScreen> {
         actions:  [
           Padding(
             padding: EdgeInsets.only(right: 15.w),
-            child: Icon(Icons.shopping_cart_outlined, color: Colors.black),
+            child:Consumer<CartProvider>(
+  builder: (context, cart, child) {
+
+    return Stack(
+      children: [
+
+        IconButton(
+          icon: const Icon(
+            Icons.shopping_cart_outlined,
+          ),
+
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (_) =>
+                    const CartScreen(),
+              ),
+            );
+          },
+        ),
+
+        if (cart.itemCount > 0)
+          Positioned(
+            right: 0,
+            top: 0,
+
+            child: Container(
+              padding:
+                  const EdgeInsets.all(4),
+
+              decoration:
+                  const BoxDecoration(
+                color: Colors.red,
+                shape: BoxShape.circle,
+              ),
+
+              child: Text(
+                cart.itemCount.toString(),
+
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 10,
+                ),
+              ),
+            ),
+          ),
+      ],
+    );
+  },
+),
           ),
         ],
       ),
