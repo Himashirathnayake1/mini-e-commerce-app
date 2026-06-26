@@ -96,47 +96,47 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                       Expanded(
                         child: Text(
                           product.name,
-                          style: const TextStyle(
-                            fontSize: 23,
+                          style:  TextStyle(
+                            fontSize: 30.sp,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
                       ),
                       Text(
                         "Rs.${product.price}",
-                        style: const TextStyle(
+                        style:  TextStyle(
                           color: Color(0xff6C63FF),
                           fontWeight: FontWeight.bold,
-                          fontSize: 23,
+                          fontSize: 30.sp,
                         ),
                       ),
                     ],
                   ),
-                  const SizedBox(height: 15),
+              SizedBox(height: 15.h),
 
                   // Rating
                   Row(
                     children: [
                       const Icon(Icons.star, color: Colors.amber),
-                      const SizedBox(width: 5),
+                     SizedBox(width: 5.w),
                       Text(
                         "${product.rating}",
                         style: const TextStyle(fontWeight: FontWeight.w600),
                       ),
-                      const SizedBox(width: 10),
+                     SizedBox(width: 10.w),
                       const Text(
                         "(1,245 Reviews)",
                         style: TextStyle(color: Colors.grey),
                       ),
                     ],
                   ),
-                  const SizedBox(height: 25),
+                  SizedBox(height: 25.h),
 
-                  const Text(
+               Text(
                     "Quantity",
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30.sp),
                   ),
-                  const SizedBox(height: 10),
+               SizedBox(height: 10.h),
                   Container(
                     width: 130,
                     height: 50,
@@ -159,13 +159,13 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                         ),
                         Text(
                           quantity.toString(),
-                          style: const TextStyle(
-                            fontSize: 18,
+                          style:  TextStyle(
+                            fontSize: 18.sp,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
                         IconButton(
-                          icon: const Icon(Icons.add),
+                          icon: Icon(Icons.add),
                           onPressed: () {
                             setState(() {
                               quantity++;
@@ -175,14 +175,14 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                       ],
                     ),
                   ),
-                  const SizedBox(height: 25),
+                  SizedBox(height: 25.h),
 
                   // Description
-                  const Text(
+               Text(
                     "Description",
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30.sp),
                   ),
-                  const SizedBox(height: 10),
+               SizedBox(height: 10.h),
 
                   Expanded(
                     child: SingleChildScrollView(
@@ -192,7 +192,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                       ),
                     ),
                   ),
-                  const SizedBox(height: 15),
+                  SizedBox(height: 15.h),
                   Row(
                     children: [
                       // Add To Cart Button
@@ -214,43 +214,43 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                           style: ElevatedButton.styleFrom(
                         
                             backgroundColor: Colors.white,
-                            side: const BorderSide(color: Color(0xff6C63FF)),
+                            side:  BorderSide(color: Color(0xff6C63FF)),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(15),
                             ),
-                               minimumSize: Size(double.infinity, 55), // Set the height of the button 
+                               minimumSize: Size(double.infinity, 90.h), // Set the height of the button 
                           ),
                           
 
-                          child: const Center(
+                          child:  Center(
                             child: Text(
                               "Add To Cart",
                               style: TextStyle(
                                 color: Color(0xff6C63FF),
                                 fontWeight: FontWeight.bold,
-                                fontSize: 16,
+                                fontSize: 30.sp,
                               ),
                             ),
                           ),
                         ),
                       ),
-                      const SizedBox(width: 15),
+                    SizedBox(width: 15.w  ),
 
                       // Buy Now Button
                       Expanded(
                         child: Container(
-                          height: 55,
+                          height: 90.h,
                           decoration: BoxDecoration(
                             color: const Color(0xff6C63FF),
                             borderRadius: BorderRadius.circular(15),
                           ),
-                          child: const Center(
+                          child:  Center(
                             child: Text(
                               "Buy Now",
                               style: TextStyle(
                                 color: Colors.white,
                                 fontWeight: FontWeight.bold,
-                                fontSize: 16,
+                                fontSize: 30.sp,
                               ),
                             ),
                           ),

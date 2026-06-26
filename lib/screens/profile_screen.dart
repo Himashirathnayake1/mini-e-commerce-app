@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:mini_e/screens/favourutes_screen.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -109,11 +110,13 @@ class ProfileScreen extends StatelessWidget {
 
                   SizedBox(width: 18.w),
 
+                
+                  
                   Expanded(
                     child: _buildStatCard(
-                      "8",
-                      "Wishlist",
-                      Icons.favorite_outline,
+                      "12",
+                      "Reviews",
+                      Icons.rate_review_outlined,
                     ),
                   ),
 
@@ -143,7 +146,14 @@ class ProfileScreen extends StatelessWidget {
                 title: "Payment Methods",
               ),
 
-              _buildMenuTile(icon: Icons.favorite_outline, title: "Wishlist"),
+              _buildMenuTile(icon: Icons.favorite_outline, title: "Wishlist",onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const FavoritesScreen(),
+                  ),
+                );
+              },),
 
               _buildMenuTile(icon: Icons.settings_outlined, title: "Settings"),
 
@@ -213,6 +223,7 @@ class ProfileScreen extends StatelessWidget {
   static Widget _buildMenuTile({
     required IconData icon,
     required String title,
+    VoidCallback? onTap,
   }) {
     return Container(
       margin: EdgeInsets.only(bottom: 16.h),
@@ -227,12 +238,20 @@ class ProfileScreen extends StatelessWidget {
       ),
 
       child: ListTile(
-        leading: Icon(icon, color: const Color(0xff6C63FF)),
+  onTap: onTap,
 
-        title: Text(title),
+  leading: Icon(
+    icon,
+    color: const Color(0xff6C63FF),
+  ),
 
-        trailing: const Icon(Icons.arrow_forward_ios, size: 16),
-      ),
+  title: Text(title),
+
+  trailing: const Icon(
+    Icons.arrow_forward_ios,
+    size: 16,
+  ),
+),
     );
   }
 }

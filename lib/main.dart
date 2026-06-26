@@ -1,16 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:mini_e/providers/favourites_provider.dart';
 import 'screens/splash_screen.dart';
 import 'package:provider/provider.dart';
 import 'providers/cart_provider.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
   runApp(
+    
+    MultiProvider(
+  providers: [
+
     ChangeNotifierProvider(
-      create: (context) => CartProvider(),
-      child: const MyApp(),
+      create: (_) => CartProvider(),
     ),
+
+    ChangeNotifierProvider(
+      create: (_) => FavoritesProvider(),
+       
+    ),
+  ],
+
+  child: const MyApp(),
+)
   );
 }
 
